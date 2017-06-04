@@ -1,5 +1,5 @@
 /* Engine.js
-* 这个文件提供了游戏循环玩耍的功能（更新敌人和渲染）
+ * 这个文件提供了游戏循环玩耍的功能（更新敌人和渲染）
  * 在屏幕上画出出事的游戏面板，然后调用玩家和敌人对象的 update / render 函数（在 app.js 中定义的）
  *
  * 一个游戏引擎的工作过程就是不停的绘制整个游戏屏幕，和小时候你们做的 flipbook 有点像。当
@@ -109,7 +109,34 @@ var Engine = (function(global) {
             }
         }
 
-        renderEntities();
+        if (player.lives === 0) {
+            // 游戏结束
+            ctx.font = '23pt Arial';
+            ctx.globalAlpha = 0.65;
+            ctx.fillStyle = 'black';
+            ctx.fillRect(78, 200, 350, 200);
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = 'yellow';
+            ctx.fillText('GAME OVER!', 155, 285);
+            ctx.font = '18pt Arial';
+            ctx.fillStyle = 'white';
+            ctx.fillText('Press Enter to Play Again', 117, 350);
+
+        } else if (player.level === settings.maxLevel) {
+            // 游戏通关
+            ctx.font = '23pt Arial';
+            ctx.globalAlpha = 0.65;
+            ctx.fillStyle = 'black';
+            ctx.fillRect(78, 200, 350, 200);
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = 'yellow';
+            ctx.fillText('CONGRATULATIONS!', 100, 285);
+            ctx.font = '18pt Arial';
+            ctx.fillStyle = 'white';
+            ctx.fillText('Press Enter to Play Again', 117, 350);
+        } else {
+            renderEntities();
+        }
     }
 
     /* 这个函数会在每个时间间隙被 render 函数调用。他的目的是分别调用你在 enemy 和 player
@@ -119,6 +146,11 @@ var Engine = (function(global) {
         /* 遍历在 allEnemies 数组中存放的作于对象然后调用你事先定义的 render 函数 */
         allEnemies.forEach(function(enemy) {
             enemy.render();
+        });
+
+        /* 遍历在 allRocks 数组中的所有石头并调用其 render 函数 */
+        allRocks.forEach(function(rock) {
+            rock.render();
         });
 
         player.render();
@@ -140,7 +172,9 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png',
+        'images/Rock.png'
     ]);
     Resources.onReady(init);
 
