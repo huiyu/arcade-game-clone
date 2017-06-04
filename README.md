@@ -2,6 +2,29 @@
 前端纳米学位街机游戏克隆项目
 ===============================
 
-学生应该用这个[评审标准](https://review.udacity.com/#!/rubrics/499/view))来自我检查自己提交的代码。 确认自己写的函数要是**面向对象的** -  要么是类函数（就像函数 Player 和 Enemy）要么是类的原型链上的函数比如 Enemy.prototype.checkCollisions ， 在类函数里面或者类的原型链函数里面适当的使用关键词 'this' 来引用调用该函数的对象实例。最后保证你的**readme.md**文件要写明关于如何运行和如何玩你的街机游戏的指引。
+##  启动游戏
 
-关于如何开始这个项目的更详细的指导，可以查阅这份[指南](https://gdgdocs.org/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true)。
+可以通过任意HTTP服务器启动游戏，比如使用Node HTTP Server：
+
+```bash
+​```bash
+npm install -g http-server
+http-server ./arcade-game-clone/ -p 8000 
+​```
+```
+
+然后访问`http://localhost:8000/`即可开始游戏。
+
+## 游戏规则
+
+如图所示，玩家控制人物移动到对岸即可通过当前关卡（level）。总共有五个关卡，全部通过即可获取游戏胜利。
+
+玩家需避开虫子和石头，被虫子碰到就会丧失一条命。玩家总共有三条命，全部丢完则游戏结束。
+
+![screenshot.png](./images/screenshot.png)
+
+## 基本操作
+
+* 方向键上下左右控制人物
+* 游戏结束时按回车键重新开始游戏
+
